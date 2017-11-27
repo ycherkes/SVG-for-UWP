@@ -35,7 +35,10 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>TestKey.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SvgConverter.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.9.9.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
@@ -64,6 +67,7 @@
     <Compile Include="VieModels\SvgUpdatingViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="SvgConverter.pfx" />
     <None Include="TestKey.snk" />
     <Page Include="Controls\CircularProgressBar.xaml">
       <SubType>Designer</SubType>
