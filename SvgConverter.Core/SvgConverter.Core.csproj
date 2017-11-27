@@ -68,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="SvgConverter.pfx" />
-    <None Include="TestKey.snk" />
     <Page Include="Controls\CircularProgressBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
