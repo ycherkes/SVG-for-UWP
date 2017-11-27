@@ -60,6 +60,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ConvertSvgCommand.cs" />
+    <Compile Include="Extensions\DebugHelper.cs" />
     <Compile Include="Extensions\DteExtensions.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

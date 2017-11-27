@@ -38,6 +38,13 @@ namespace SvgConverterCore.Utils
             }
         }
 
+        public static async Task ConvertFile(string filePath)
+        {
+            var fileDirectory = Path.GetDirectoryName(filePath);
+
+            await CreateInlinedSvg(false, filePath, fileDirectory, s => { }, true);
+        }
+
         private static async Task CreateInlinedSvg(bool removeStyleElements, string fileName, string patchedDirectory, Action<string> addFileToProject, bool overwrite)
         {
             var xmlSource = File.ReadAllText(fileName);

@@ -15,10 +15,10 @@
         defining some of the constants that we will use inside the file. -->
 
   <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
-  <Extern href="stdidcmd.h"/>
+  <Extern href="stdidcmd.h" />
 
   <!--This header contains the command ids for the menus provided by the shell. -->
-  <Extern href="vsshlids.h"/>
+  <Extern href="vsshlids.h" />
 
   <!--The Commands section is where commands, menus, and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
@@ -43,10 +43,19 @@
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
       <Button guid="guidSvgConverterToolWindowPackageCmdSet" id="SvgConverterToolWindowCommandId" priority="0x0100" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
           <ButtonText>Svg for UWP Converter</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidSvgConverterToolWindowPackageCmdSet1" id="cmdidConvertSvgCommand" priority="0x0100" type="Button">
+        <Parent guid="guidSvgConverterToolWindowPackageCmdSet1" id="MyMenuGroup" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <!-- Do not show on the menu controller's drop down list-->
+        <CommandFlag>DynamicItemStart</CommandFlag>
+        <Strings>
+          <ButtonText>Inline Svg Styles</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -58,8 +67,13 @@
             bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
-      <Bitmap guid="guidImages" href="Resources\SvgConverterToolWindowCommand.png" usedList="bmpPic1"/>
+      <Bitmap guid="guidImages" href="Resources\SvgConverterToolWindowCommand.png" usedList="bmpPic1" />
     </Bitmaps>
+    <Groups>
+      <Group guid="guidSvgConverterToolWindowPackageCmdSet1" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE" />
+      </Group>
+    </Groups>
   </Commands>
 
   <Symbols>
@@ -71,8 +85,13 @@
       <IDSymbol name="SvgConverterToolWindowCommandId" value="0x0100" />
     </GuidSymbol>
 
-    <GuidSymbol name="guidImages" value="{f961d117-6ea8-4f0a-b882-f34eba13938d}" >
+    <GuidSymbol name="guidImages" value="{f961d117-6ea8-4f0a-b882-f34eba13938d}">
       <IDSymbol name="bmpPic1" value="1" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{e1ab6f74-358a-4950-9918-2c9b55485582}" name="guidSvgConverterToolWindowPackageCmdSet1">
+      <IDSymbol value="4128" name="MyMenuGroup" />
+      <IDSymbol value="256" name="cmdidConvertSvgCommand" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>
