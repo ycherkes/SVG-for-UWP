@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="SvgForUWPConverter.Controls.SvgConverterToolWindowControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
+             xmlns:envDte="clr-namespace:EnvDTE;assembly=EnvDTE"
+             xmlns:controls="clr-namespace:SvgConverterCore.Controls;assembly=SvgConverterCore"
+             xmlns:viewModels="clr-namespace:SvgForUWPConverter.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="250" d:DesignWidth="300"
+             MinHeight="250"
+             MinWidth="300"
+             x:Name="MySvgConverterToolWindowControl">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}" />
+        </Style>
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}" />
+        </Style>
+        <Style TargetType="{x:Type Expander}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static vsshell:VsBrushes.WindowTextKey}}" />
+        </Style>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModels:SvgUpdatingViewModel x:Name="ViewModel" />
+    </UserControl.DataContext>
+    <Grid>
+        <ScrollViewer Padding="12" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="0,0,8,0" VerticalAlignment="Center" Text="Project:" />
+                    <ComboBox Name="Projects" Grid.Row="0" Grid.Column="1" Margin="0,0,8,0" ToolTip="Project to which the Assets are added" ItemsSource="{Binding Projects, Mode=OneWay}" SelectionChanged="ProjectsOnSelectionChanged">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate DataType="envDte:Project">
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Button Name="ButtonRefresh" Grid.Row="0" Grid.Column="2" Content="Refresh" Padding="4,0" ToolTip="Refresh Project List for current Solution" Click="Refresh_OnClick" />
+                    <TextBlock Grid.Row="1" Grid.Column="0" Margin="0,8,8,0" VerticalAlignment="Center" Text="Input Folder:" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,8,8,0" HorizontalAlignment="Stretch" IsReadOnly="False" TextAlignment="Left" Text="{Binding InputFolder}" ToolTip="{Binding InputFolder}" />
+                    <Button Grid.Row="1" Grid.Column="2" Margin="0,8,0,0" Content="..." Click="ChooseInputFolder_OnClick" />
+                    <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,8,8,0" VerticalAlignment="Center" Text="Output Folder:" />
+                    <TextBox Grid.Row="2" Grid.Column="1" Margin="0,8,8,0" HorizontalAlignment="Stretch" IsReadOnly="False" TextAlignment="Left" Text="{Binding OutputFolder}" ToolTip="{Binding OutputFolder}" />
+                    <Button Grid.Row="2" Grid.Column="2" Margin="0,8,0,0" Content="..." Click="ChooseOutputFolderOnClick" />
+                </Grid>
+                <Grid Margin="0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <CheckBox Name="AddToProject" VerticalAlignment="Center" Grid.Row="0" Padding="5,5" VerticalContentAlignment="Center" Content="Add to Project" IsChecked="{Binding AddItemsToProject, Mode=TwoWay}" IsEnabled="{Binding IsAddingAvailable}" ToolTip="Updated svgs will be added to selected Project" />
+                    <CheckBox Name="OverwriteExistingFiles" VerticalAlignment="Center" Grid.Row="1" Padding="5,5" VerticalContentAlignment="Center" Content="Overwrite existing files" IsChecked="{Binding OverwriteExistingFiles}" ToolTip="All files in the output folder fil be overwritten" />
+                    <CheckBox Name="RemoveInlinedStyles" VerticalAlignment="Center" Grid.Row="2" Padding="5,5" VerticalContentAlignment="Center" Content="Remove inlined styles" IsChecked="{Binding RemoveInlinedStyles}" ToolTip="Remove inlined styles" />
+                    <Button Name="ButtonInline" Grid.Row="3" Grid.Column="1" Margin="0" HorizontalAlignment="Right" Content="Convert" FontSize="14" Padding="4,0" ToolTip="Inline Styles and add them to Project (if selected)" Height="{Binding ElementName=ButtonRefresh, Path=ActualHeight}" Click="ConvertOnClick" />
+                    <controls:CircularProgressBar Grid.RowSpan="3" Width="50" Height="50" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="ProgressBar" Visibility="Collapsed"/>
+                </Grid>
+                <TextBlock Name="Error" Foreground="#a94442" TextWrapping="Wrap" TextTrimming="CharacterEllipsis" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
