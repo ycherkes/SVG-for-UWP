@@ -62,14 +62,16 @@ namespace SvgForUWPConverter
             //    DebugHelper.IdentifyInternalObjectTypes(uiHierarchyItem);
             //}
 
-            if(documents.All(x => !(x.Object is ProjectItem) || !IsSvgFile(((ProjectItem) x.Object).Name) ))  return;
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            if (documents.All(x => !(x.Object is ProjectItem) || !IsSvgFile(((ProjectItem) x.Object).Name) ))  return;
 
             menuCommand.Visible = true;
             menuCommand.Enabled = true;
         }
 
 
-        private bool IsSvgFile(string fileName)
+        private static bool IsSvgFile(string fileName)
         {
             if (string.IsNullOrEmpty(fileName) || fileName.Length < 4) return false;
 
@@ -81,6 +83,7 @@ namespace SvgForUWPConverter
 
         private IEnumerable<UIHierarchyItem> GetSelectedDocuments()
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
             var dte = (EnvDTE80.DTE2) ServiceProvider.GetService(typeof(DTE));
             var selectedItems = ((UIHierarchy)dte.Windows.Item(EnvDTE.Constants.vsWindowKindSolutionExplorer).Object).SelectedItems as IEnumerable<UIHierarchyItem>;
 
@@ -119,7 +122,10 @@ namespace SvgForUWPConverter
         /// <param name="e">Event args.</param>
         private async void MenuItemCallback(object sender, EventArgs e)
         {
-            var documents = GetSelectedDocuments().Select(x => x.Object).OfType<ProjectItem>().ToArray();
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            var documents = GetSelectedDocuments().Select(x => x.Object)
+                                                  .OfType<ProjectItem>()
+                                                  .ToArray();
 
             if (!documents.Any()) return;
 
