@@ -33,7 +33,6 @@ namespace SvgForUWPConverter
         /// Initializes a new instance of the <see cref="SvgConverterToolWindowCommand"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
-        /// <param name="package">Owner package, not null.</param>
         private SvgConverterToolWindowCommand()
         {
             var menuCommandId = new CommandID(CommandSet, CommandId);
@@ -59,6 +58,7 @@ namespace SvgForUWPConverter
         {
             _package = package ?? throw new ArgumentNullException(nameof(package));
             _commandService = (OleMenuCommandService) await package.GetServiceAsync(typeof(IMenuCommandService));
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
             Instance = new SvgConverterToolWindowCommand();
         }
 

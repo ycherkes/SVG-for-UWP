@@ -111,6 +111,7 @@ namespace SvgForUWPConverter
         {
             _package = package ?? throw new ArgumentNullException(nameof(package));
             _commandService = (OleMenuCommandService) await package.GetServiceAsync(typeof(IMenuCommandService));
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
             Instance = new ConvertSvgCommand();
         }
 
