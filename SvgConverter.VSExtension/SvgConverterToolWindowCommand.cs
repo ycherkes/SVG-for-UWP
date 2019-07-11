@@ -3,6 +3,7 @@ using System.ComponentModel.Design;
 using System.Threading;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
+using Task = System.Threading.Tasks.Task;
 
 namespace SvgForUWPConverter
 {
@@ -24,22 +25,20 @@ namespace SvgForUWPConverter
         /// <summary>
         /// VS Package that provides this command, not null.
         /// </summary>
-        private readonly AsyncPackage _package;
+        private static AsyncPackage _package;
+
+        private static OleMenuCommandService _commandService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SvgConverterToolWindowCommand"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        private SvgConverterToolWindowCommand(AsyncPackage package)
+        private SvgConverterToolWindowCommand()
         {
-            _package = package ?? throw new ArgumentNullException(nameof(package));
-
-            if (!(ServiceProvider.GetService(typeof(IMenuCommandService)) is OleMenuCommandService commandService)) return;
-
             var menuCommandId = new CommandID(CommandSet, CommandId);
             var menuItem = new MenuCommand(ShowToolWindowAsync, menuCommandId);
-            commandService.AddCommand(menuItem);
+            _commandService.AddCommand(menuItem);
         }
 
         /// <summary>
@@ -51,18 +50,16 @@ namespace SvgForUWPConverter
             private set;
         }
 
-        /// <summary>
-        /// Gets the service provider from the owner package.
-        /// </summary>
-        private IServiceProvider ServiceProvider => _package;
-
+        
         /// <summary>
         /// Initializes the singleton instance of the command.
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        public static void Initialize(AsyncPackage package)
+        public static async  Task InitializeAsync(AsyncPackage package)
         {
-            Instance = new SvgConverterToolWindowCommand(package);
+            _package = package ?? throw new ArgumentNullException(nameof(package));
+            _commandService = (OleMenuCommandService) await package.GetServiceAsync(typeof(IMenuCommandService));
+            Instance = new SvgConverterToolWindowCommand();
         }
 
         /// <summary>

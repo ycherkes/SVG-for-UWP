@@ -43,7 +43,7 @@ namespace SvgForUWPConverter
         
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            SvgConverterToolWindowCommand.Initialize(this);
+            await SvgConverterToolWindowCommand.InitializeAsync(this);
             await ConvertSvgCommand.InitializeAsync(this);
             await base.InitializeAsync(cancellationToken, progress);
         }
