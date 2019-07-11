@@ -46,7 +46,7 @@
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <ButtonText>Svg for UWP Converter</ButtonText>
+          <ButtonText>SVG for UWP Converter</ButtonText>
         </Strings>
       </Button>
       <Button guid="guidSvgConverterToolWindowPackageCmdSet1" id="cmdidConvertSvgCommand" priority="0x0100" type="Button">
@@ -55,7 +55,7 @@
         <!-- Do not show on the menu controller's drop down list-->
         <CommandFlag>DynamicItemStart</CommandFlag>
         <Strings>
-          <ButtonText>Inline Svg Styles</ButtonText>
+          <ButtonText>Inline SVG Styles</ButtonText>
         </Strings>
       </Button>
     </Buttons>

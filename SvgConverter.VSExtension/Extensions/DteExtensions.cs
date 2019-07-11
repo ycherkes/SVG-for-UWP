@@ -9,6 +9,8 @@ namespace SvgForUWPConverter.Extensions
     {
         public static string GetSolutionPath()
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             try
             {
                 var solution = ((DTE)ServiceProvider.GlobalProvider.GetService(typeof(DTE))).Solution;
