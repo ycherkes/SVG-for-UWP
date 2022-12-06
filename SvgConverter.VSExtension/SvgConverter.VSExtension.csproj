@@ -78,7 +78,6 @@
     <Content Include="Resources\SvgConverterToolWindowPackage.ico">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="Resources\ToolWindow1Command.png" />
     <VSCTCompile Include="SvgConverterToolWindowPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
       <SubType>Designer</SubType>

@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
         <Identity Id="SvgForUWPConverter.7cebb049-c9bb-47b7-8360-aa310118810e" Version="1.6.0" Language="en-US" Publisher="Yevhen Cherkes" />
-        <DisplayName>SVG For UWP Converter</DisplayName>
+        <DisplayName>Svg for Uwp Converter</DisplayName>
         <Description xml:space="preserve">Inlines CSS styles into SVG elements to make the file compatible with the UWP SvgImageSource</Description>
         <Icon>Package.ico</Icon>
         <PreviewImage>Preview.png</PreviewImage>
