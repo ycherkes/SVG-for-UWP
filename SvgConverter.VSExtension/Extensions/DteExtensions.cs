@@ -1,7 +1,8 @@
-﻿using System;
-using System.IO;
-using EnvDTE;
+﻿using EnvDTE;
+using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
+using System;
+using System.IO;
 
 namespace SvgForUWPConverter.Extensions
 {
@@ -13,8 +14,8 @@ namespace SvgForUWPConverter.Extensions
 
             try
             {
-                var solution = ((DTE)ServiceProvider.GlobalProvider.GetService(typeof(DTE))).Solution;
-                if (!string.IsNullOrEmpty(solution.FullName))
+                var solution = ((DTE2)ServiceProvider.GlobalProvider.GetService(typeof(DTE)))?.Solution;
+                if (!string.IsNullOrEmpty(solution?.FullName))
                 {
                     return Path.GetDirectoryName(solution.FullName);
                 }

@@ -1,4 +1,11 @@
-﻿using System;
+﻿using EnvDTE;
+using EnvDTE80;
+using Microsoft.VisualStudio.Settings;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Settings;
+using SvgConverterCore.Utils;
+using SvgForUWPConverter.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -7,12 +14,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using EnvDTE;
-using Microsoft.VisualStudio.Settings;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Settings;
-using SvgConverterCore.Utils;
-using SvgForUWPConverter.Extensions;
 using UserControl = System.Windows.Controls.UserControl;
 
 
@@ -22,12 +23,12 @@ namespace SvgForUWPConverter.Controls
     {
         private readonly WritableSettingsStore _settingsStore;
 
-        private static readonly DTE Dte;
+        private static readonly DTE2 Dte;
 
         static SvgConverterToolWindowControl()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            Dte = (DTE)ServiceProvider.GlobalProvider.GetService(typeof(DTE));
+            Dte = (DTE2)ServiceProvider.GlobalProvider.GetService(typeof(DTE));
         }
 
         public SvgConverterToolWindowControl()
@@ -51,7 +52,7 @@ namespace SvgForUWPConverter.Controls
             if (folderBrowserDialog.ShowDialog() != DialogResult.OK) return;
 
             ViewModel.InputFolder = folderBrowserDialog.SelectedPath;
-               
+
             _settingsStore.SetString("External Tools", "SvgConverter-InputFolderPath", folderBrowserDialog.SelectedPath);
         }
 
@@ -104,7 +105,7 @@ namespace SvgForUWPConverter.Controls
             ThreadHelper.ThrowIfNotOnUIThread();
 
             if (project == null || project.Kind == "{66A2671D-8FB5-11D2-AA7E-00C04F688DDE}") // "Miscellaneous Files"
-                return new Project[0];
+                return Array.Empty<Project>();
 
             if (project.Kind != vsProjectKindSolutionFolder)
                 return new[] { project };
@@ -151,7 +152,7 @@ namespace SvgForUWPConverter.Controls
             {
                 Error.Text = ex.Message;
             }
-            
+
             ProgressBar.Visibility = Visibility.Hidden;
         }
 

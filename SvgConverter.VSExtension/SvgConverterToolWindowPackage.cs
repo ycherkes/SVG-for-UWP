@@ -1,9 +1,8 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using System;
 using System.Runtime.InteropServices;
 using System.Threading;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
 
 namespace SvgForUWPConverter
@@ -31,16 +30,15 @@ namespace SvgForUWPConverter
     [ProvideToolWindow(typeof(SvgConverterToolWindow))]
     [ProvideAutoLoad(UIContextGuids.SolutionExists, PackageAutoLoadFlags.BackgroundLoad)]
     [Guid(PackageGuidString)]
-    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
     public sealed class SvgConverterToolWindowPackage : AsyncPackage
     {
         /// <summary>
         /// SvgConverterToolWindowPackage GUID string.
         /// </summary>
-        public const string PackageGuidString = "0232e159-9d7b-4356-b926-577af62c67ab";
-        
+        private const string PackageGuidString = "0232e159-9d7b-4356-b926-577af62c67ab";
+
         #region Package Members
-        
+
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             await SvgConverterToolWindowCommand.InitializeAsync(this);

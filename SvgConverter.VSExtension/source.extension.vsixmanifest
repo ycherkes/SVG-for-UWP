@@ -1,22 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="SvgForUWPConverter.7cebb049-c9bb-47b7-8360-aa310118810e" Version="1.5.5" Language="en-US" Publisher="Yevhen Cherkes" />
-        <DisplayName>SVG For UWP Converter</DisplayName>
-        <Description xml:space="preserve">Inlines CSS styles in SVG elements to make the file compatible with the UWP SvgImageSource</Description>
+        <Identity Id="SvgForUWPConverter.7cebb049-c9bb-47b7-8360-aa310118810e" Version="1.6.0" Language="en-US" Publisher="Yevhen Cherkes" />
+        <DisplayName>Svg for Uwp Converter</DisplayName>
+        <Description xml:space="preserve">Inlines CSS styles into SVG elements to make the file compatible with the UWP SvgImageSource</Description>
         <Icon>Package.ico</Icon>
         <PreviewImage>Preview.png</PreviewImage>
         <Tags>SVG UWP SvgImageSource</Tags>
     </Metadata>
     <Installation>
-        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0,17.0)" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0,17.0)" />
+		<InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)">
+			<ProductArchitecture>amd64</ProductArchitecture>
+		</InstallationTarget>
     </Installation>
     <Dependencies>
-        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.7,)" />
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
         <Dependency Id="Microsoft.VisualStudio.MPF.15.0" DisplayName="Visual Studio MPF 15.0" d:Source="Installed" Version="[15.0,)" />
     </Dependencies>
     <Prerequisites>
-        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.0,)" DisplayName="Visual Studio core editor" />
     </Prerequisites>
     <Assets>
         <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />

@@ -8,7 +8,7 @@ using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using IAsyncServiceProvider = Microsoft.VisualStudio.Shell.IAsyncServiceProvider;
+using Task = System.Threading.Tasks.Task;
 
 namespace SvgForUWPConverter
 {
@@ -20,12 +20,12 @@ namespace SvgForUWPConverter
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandId = 256;
+        private const int CommandId = 256;
 
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("e1ab6f74-358a-4950-9918-2c9b55485582");
+        private static readonly Guid CommandSet = new Guid("e1ab6f74-358a-4950-9918-2c9b55485582");
 
         /// <summary>
         /// VS Package that provides this command, not null.
@@ -33,6 +33,7 @@ namespace SvgForUWPConverter
         private static AsyncPackage _package;
 
         private static OleMenuCommandService _commandService;
+        private static ConvertSvgCommand _instance;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConvertSvgCommand"/> class.
@@ -41,7 +42,7 @@ namespace SvgForUWPConverter
         private ConvertSvgCommand()
         {
             var menuCommandId = new CommandID(CommandSet, CommandId);
-            var menuItem = new OleMenuCommand(MenuItemCallback, menuCommandId) {Text = "Inline Svg Styles"};
+            var menuItem = new OleMenuCommand(MenuItemCallback, menuCommandId) { Text = "Inline Svg Styles" };
             menuItem.BeforeQueryStatus += MenuItem_BeforeQueryStatus;
             _commandService.AddCommand(menuItem);
         }
@@ -58,12 +59,7 @@ namespace SvgForUWPConverter
             menuCommand.Enabled = false;
 
 
-            //foreach (var uiHierarchyItem in documents)
-            //{
-            //    DebugHelper.IdentifyInternalObjectTypes(uiHierarchyItem);
-            //}
-
-            if (documents.All(x => !(x.Object is ProjectItem) || !IsSvgFile(((ProjectItem) x.Object).Name) ))  return;
+            if (documents.All(x => !(x.Object is ProjectItem) || !IsSvgFile(((ProjectItem)x.Object).Name))) return;
 
             menuCommand.Visible = true;
             menuCommand.Enabled = true;
@@ -83,36 +79,24 @@ namespace SvgForUWPConverter
         private async Task<IEnumerable<UIHierarchyItem>> GetSelectedDocumentsAsync()
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-            var dte = (EnvDTE80.DTE2) await _package.GetServiceAsync(typeof(DTE));
+            var dte = (EnvDTE80.DTE2)await _package.GetServiceAsync(typeof(DTE));
             var selectedItems = ((UIHierarchy)dte.Windows.Item(EnvDTE.Constants.vsWindowKindSolutionExplorer).Object).SelectedItems as IEnumerable<UIHierarchyItem>;
 
             return selectedItems;
         }
 
-        /// <summary>
-        /// Gets the instance of the command.
-        /// </summary>
-        public static ConvertSvgCommand Instance
-        {
-            get;
-            private set;
-        }
 
-        /// <summary>
-        /// Gets the service provider from the owner package.
-        /// </summary>
-        private IAsyncServiceProvider ServiceProvider => _package;
 
         /// <summary>
         /// Initializes the singleton instance of the command.
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        public static async System.Threading.Tasks.Task InitializeAsync(AsyncPackage package)
+        public static async Task InitializeAsync(AsyncPackage package)
         {
             _package = package ?? throw new ArgumentNullException(nameof(package));
-            _commandService = (OleMenuCommandService) await package.GetServiceAsync(typeof(IMenuCommandService));
+            _commandService = (OleMenuCommandService)await package.GetServiceAsync(typeof(IMenuCommandService));
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-            Instance = new ConvertSvgCommand();
+            _instance = new ConvertSvgCommand();
         }
 
         /// <summary>
@@ -140,7 +124,7 @@ namespace SvgForUWPConverter
                 {
                     await SvgConverter.ConvertFile(document.Properties.Item("FullPath").Value.ToString());
                 }
-                
+
             }
             catch (Exception exception)
             {

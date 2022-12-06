@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using System;
 using System.ComponentModel.Design;
 using System.Threading;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
 
 namespace SvgForUWPConverter
@@ -15,19 +15,19 @@ namespace SvgForUWPConverter
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandId = 0x0100;
+        private const int CommandId = 0x0100;
 
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
-        public static readonly Guid CommandSet = new Guid("6457631e-14a7-4f36-a534-cfdf27d78140");
+        private static readonly Guid CommandSet = new Guid("6457631e-14a7-4f36-a534-cfdf27d78140");
 
         /// <summary>
         /// VS Package that provides this command, not null.
         /// </summary>
         private static AsyncPackage _package;
-
         private static OleMenuCommandService _commandService;
+        private static SvgConverterToolWindowCommand _instance;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SvgConverterToolWindowCommand"/> class.
@@ -40,26 +40,17 @@ namespace SvgForUWPConverter
             _commandService.AddCommand(menuItem);
         }
 
-        /// <summary>
-        /// Gets the instance of the command.
-        /// </summary>
-        public static SvgConverterToolWindowCommand Instance
-        {
-            get;
-            private set;
-        }
 
-        
         /// <summary>
         /// Initializes the singleton instance of the command.
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
-        public static async  Task InitializeAsync(AsyncPackage package)
+        public static async Task InitializeAsync(AsyncPackage package)
         {
             _package = package ?? throw new ArgumentNullException(nameof(package));
-            _commandService = (OleMenuCommandService) await package.GetServiceAsync(typeof(IMenuCommandService));
+            _commandService = (OleMenuCommandService)await package.GetServiceAsync(typeof(IMenuCommandService));
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-            Instance = new SvgConverterToolWindowCommand();
+            _instance = new SvgConverterToolWindowCommand();
         }
 
         /// <summary>
