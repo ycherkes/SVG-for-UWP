@@ -48,6 +48,10 @@ If you don't have an ability to use Adobe Illustrator - you may use this tool to
 
 Then rebuild the project and everything looks fine!
 
+This util also supports group operations via tool window:
+
+![image](https://user-images.githubusercontent.com/13467759/208649275-f5afd1cc-1225-4a70-8c17-fc426d115af7.png)
+
 **Privacy Notice:** No personal data is collected at all.
 
 This tool has been working well for my own personal needs, but outside that its future depends on your feedback. Feel free to [open an issue](https://github.com/ycherkes/SVG-for-UWP/issues).
