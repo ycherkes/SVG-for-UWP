@@ -11,15 +11,14 @@
 
 The Image control supports SVG files beginning from Windows 10 Creators Update (version 1703, build 15063).
 
-It's just a partial support of SVG Ver 1.1 specification (see  [SVG Support](https://msdn.microsoft.com/en-us/library/windows/desktop/mt790715%28v=vs.85%29.aspx))
+Unfortunatelly it's just a partial support of SVG Ver 1.1 specification (see  [SVG Support](https://msdn.microsoft.com/en-us/library/windows/desktop/mt790715%28v=vs.85%29.aspx))
 
-And it doesn't support css-like styles. If you used Adobe Illustrator for export image, you can play with export settings as described here:
- [SVG images shown blacked out in UWP application
-](https://stackoverflow.com/questions/47557428/svg-images-shown-blacked-out-in-uwp-application)
+As a result, it does not support css-like styles. 
+To fix it you may:
+* play with export settings of Adobe Illustrator as described here: [SVG images shown blacked out in UWP application](https://stackoverflow.com/questions/47557428/svg-images-shown-blacked-out-in-uwp-application)
+* use this tool.
 
-If you don't have an ability to use Adobe Illustrator - you may use this tool to fix the showing issues.
-
-**After installation you can use this extension via:**
+**There are three ways how you can use this utility:**
 - View -> Other Windows -> "**SVG for UWP Converter**".
 - From the context menu of the Solution Explorer on the SVG file -> "**Inline SVG Styles**".
 - As a standalone [desktop application](https://github.com/ycherkes/SVG-for-UWP/releases/download/1.6.0-Visual-Studio-2019-2022/SvgForUwpConverter_Desktop_1.6.0.zip).
@@ -49,11 +48,11 @@ If you don't have an ability to use Adobe Illustrator - you may use this tool to
 
 Then rebuild the project and everything looks fine!
 
-This util also supports group operations via tool window:
+**This util also supports group operations via tool window:**
 
 ![image](https://user-images.githubusercontent.com/13467759/208649275-f5afd1cc-1225-4a70-8c17-fc426d115af7.png)
 
-Or you may use it as a standalone [Desktop WPF application](https://github.com/ycherkes/SVG-for-UWP/releases/download/1.6.0-Visual-Studio-2019-2022/SvgForUwpConverter_Desktop_1.6.0.zip):
+**A standalone [Desktop WPF application](https://github.com/ycherkes/SVG-for-UWP/releases/download/1.6.0-Visual-Studio-2019-2022/SvgForUwpConverter_Desktop_1.6.0.zip):**
 
 ![image](https://user-images.githubusercontent.com/13467759/208650362-b4890a08-50f4-49a9-aaeb-7c7b2eca690b.png)
 
