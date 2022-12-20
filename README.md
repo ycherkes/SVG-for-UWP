@@ -19,9 +19,10 @@ To fix it you may:
 * use this tool.
 
 **There are three ways how you can use this utility:**
-- View -> Other Windows -> "**SVG for UWP Converter**".
+1. As a VS extension:
+- VS Tool window: View -> Other Windows -> "**SVG for UWP Converter**".
 - From the context menu of the Solution Explorer on the SVG file -> "**Inline SVG Styles**".
-- As a standalone [desktop application](https://github.com/ycherkes/SVG-for-UWP/releases/download/1.6.0-Visual-Studio-2019-2022/SvgForUwpConverter_Desktop_1.6.0.zip).
+2. As a standalone [desktop application](https://github.com/ycherkes/SVG-for-UWP/releases/download/1.6.0-Visual-Studio-2019-2022/SvgForUwpConverter_Desktop_1.6.0.zip).
 
 
 ## Sample
