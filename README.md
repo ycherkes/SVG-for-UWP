@@ -52,7 +52,7 @@ This util also supports group operations via tool window:
 
 ![image](https://user-images.githubusercontent.com/13467759/208649275-f5afd1cc-1225-4a70-8c17-fc426d115af7.png)
 
-Or you may use it as a standalone [Desktop WPF application](https://github.com/ycherkes/SVG-for-UWP/files/2209693/SvgForUwpConverter_Desktop_1.1.0.0.zip):
+Or you may use it as a standalone [Desktop WPF application](https://github.com/ycherkes/SVG-for-UWP/releases/download/1.6.0-Visual-Studio-2019-2022/SvgForUwpConverter_Desktop_1.6.0.zip):
 
 ![image](https://user-images.githubusercontent.com/13467759/208650362-b4890a08-50f4-49a9-aaeb-7c7b2eca690b.png)
 
