@@ -22,6 +22,7 @@ If you don't have an ability to use Adobe Illustrator - you may use this tool to
 **After installation you can use this extension via:**
 - View -> Other Windows -> "**SVG for UWP Converter**".
 - From the context menu of the Solution Explorer on the SVG file -> "**Inline SVG Styles**".
+- As a standalone [desktop application](https://github.com/ycherkes/SVG-for-UWP/releases/download/1.6.0-Visual-Studio-2019-2022/SvgForUwpConverter_Desktop_1.6.0.zip).
 
 
 ## Sample
