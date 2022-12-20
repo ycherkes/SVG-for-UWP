@@ -52,6 +52,10 @@ This util also supports group operations via tool window:
 
 ![image](https://user-images.githubusercontent.com/13467759/208649275-f5afd1cc-1225-4a70-8c17-fc426d115af7.png)
 
+Or you can use it as a standalone [Desktop WPF application](https://github.com/ycherkes/SVG-for-UWP/files/2209693/SvgForUwpConverter_Desktop_1.1.0.0.zip):
+
+![image](https://user-images.githubusercontent.com/13467759/208650362-b4890a08-50f4-49a9-aaeb-7c7b2eca690b.png)
+
 **Privacy Notice:** No personal data is collected at all.
 
 This tool has been working well for my own personal needs, but outside that its future depends on your feedback. Feel free to [open an issue](https://github.com/ycherkes/SVG-for-UWP/issues).
