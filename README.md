@@ -5,7 +5,7 @@
 # SVG for UWP converter
 
 [![Marketplace](https://img.shields.io/visual-studio-marketplace/v/YevhenCherkes.svgforuwpextension.svg?label=VS%20marketplace&style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=YevhenCherkes.svgforuwpextension)
-[![Downloads](https://img.shields.io/visual-studio-marketplace/d/YevhenCherkes.svgforuwpextension?label=VS%20downloads&style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=YevhenCherkes.svgforuwpextension)
+[![Downloads](https://img.shields.io/visual-studio-marketplace/i/YevhenCherkes.svgforuwpextension?label=VS%20installs&style=for-the-badge)](https://marketplace.visualstudio.com/items?itemName=YevhenCherkes.svgforuwpextension)
 
 # **Inlines css styles to the SVG elements to make them compatible with the UWP SvgImageSource**
 
